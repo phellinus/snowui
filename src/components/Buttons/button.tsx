@@ -41,8 +41,7 @@ export const SyButton: FC<BaseButtonProps> = ({
     const classes = classNames('btn', {
         [`btn-${size}`]: size,
         [`btn-${btnType}`]: btnType,
-        [`btn-${color}`]: color,
-        [`btn-${textColor}`]: textColor,
+        [`btn-color-${color}`]: color,
         disabled: btnType == ButtonType.Link && disabled,
     });
     if (btnType == ButtonType.Link && href) {
@@ -54,7 +53,11 @@ export const SyButton: FC<BaseButtonProps> = ({
     }
     return (
         <>
-            <button className={classes} disabled={disabled}>
+            <button
+                className={classes}
+                disabled={disabled}
+                style={{ color: textColor, backgroundColor: color, borderColor: color }}
+            >
                 {children}
             </button>
         </>

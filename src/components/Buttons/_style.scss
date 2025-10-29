@@ -9,9 +9,7 @@
   vertical-align: middle;
   background-image: none;
   border: $btn-border-width solid transparent;
-  padding: $btn-padding-y $btn-padding-x;
-  font-size: $btn-font-size;
-  border-radius: $border-radius;
+  @include button-size($btn-padding-y, $btn-padding-x, $btn-font-size, $border-radius);
   box-shadow: $btn-box-shadow;
   cursor: pointer;
   transition: $btn-transition;
@@ -25,5 +23,73 @@
     > * {
       pointer-events: none;
     }
+  }
+}
+
+$btn-filled-variants: (
+        primary: (background: $primary, text: $white),
+        success: (background: $success, text: $white),
+        info: (background: $info, text: $white),
+        warning: (background: $warning, text: $white),
+        danger: (background: $danger, text: $white),
+        light: (background: $light, text: $dark),
+        dark: (background: $dark, text: $white),
+);
+
+// 默认颜色工具类，方便在其他类型按钮中复用
+@each $variant, $config in $btn-filled-variants {
+  .btn-color-#{$variant} {
+    $background: map-get($config, background);
+    $text: map-get($config, text);
+    @include button-style($background, $background, $text);
+  }
+}
+
+//按钮大小
+.btn-lg {
+  @include button-size($btn-padding-y-lg, $btn-padding-x-lg, $btn-font-size-lg, $border-radius-lg);
+}
+
+.btn-sm {
+  @include button-size($btn-padding-y-sm, $btn-padding-y-sm, $btn-font-size-sm, $border-radius-sm);
+}
+
+.btn-filled {
+  // default filled button falls back to primary theme color
+  @include button-style($primary, $primary, $white);
+
+  @each $variant, $config in $btn-filled-variants {
+    &.btn-color-#{$variant} {
+      $background: map-get($config, background);
+      $text: map-get($config, text);
+      @include button-style($background, $background, $text);
+    }
+  }
+}
+
+.btn-link {
+  font-weight: $font-weight-normal;
+  color: $btn-link-color;
+  background: none;
+  border: none;
+  text-decoration: $link-decoration;
+  box-shadow: none;
+
+  &:hover {
+    color: $btn-link-hover-color;
+    text-decoration: $link-hover-decoration;
+  }
+
+  &:focus,
+  &.focus {
+    text-decoration: $link-hover-decoration;
+    box-shadow: none;
+  }
+
+  &:disabled,
+  &.disabled {
+    color: $btn-link-disabled-color;
+    cursor: not-allowed;
+    pointer-events: none;
   }
 }

@@ -5,7 +5,7 @@ import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
 import configPrettier from 'eslint-config-prettier';
 import pluginPrettier from 'eslint-plugin-prettier';
-import { defineFlatConfig } from 'eslint-define-config';
+import {defineFlatConfig} from 'eslint-define-config';
 import * as parserTs from '@typescript-eslint/parser';
 import pluginTs from '@typescript-eslint/eslint-plugin';
 
@@ -14,7 +14,7 @@ export default defineFlatConfig([
         ignores: ['**/.*', 'build/*', 'node_modules/*', 'eslint.config.mjs'],
     },
     {
-        files: ['src/**/*.{ts,tsx,js,jsx,json}'],
+        files: ['src/**/*.{ts,tsx,js,jsx,json,scss,css}'],
         languageOptions: {
             parser: parserTs,
             parserOptions: {
@@ -44,14 +44,15 @@ export default defineFlatConfig([
                 {},
                 {
                     usePrettierrc: true,
-                    fileInfoOptions: { withNodeModules: true },
+                    fileInfoOptions: {withNodeModules: true},
                 },
             ],
-            '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }],
+            '@typescript-eslint/no-unused-vars': ['warn', {argsIgnorePattern: '^_', varsIgnorePattern: '^_'}],
             '@typescript-eslint/no-non-null-assertion': 'off',
             'react-hooks/rules-of-hooks': 'error',
             'react-hooks/exhaustive-deps': 'warn',
-            'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
+            'react-refresh/only-export-components': ['warn', {allowConstantExport: true}],
+            'no-unused-vars': 'off',
         },
     },
 ]);
