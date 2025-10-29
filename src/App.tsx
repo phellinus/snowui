@@ -8,7 +8,11 @@ function App() {
                 <h1>Hello World</h1>
                 <h2>测试</h2>
                 <SyButton>默认按钮</SyButton>
+                <SyButton btnType={ButtonType.Flat}>默认按钮</SyButton>
                 <SyButton btnType={ButtonType.Link} color="primary" textColor="white" href="https://www.baidu.com">
+                    链接按钮
+                </SyButton>
+                <SyButton btnType={ButtonType.Link} color="primary" disabled textColor="white">
                     链接按钮
                 </SyButton>
                 <h3>123</h3>
