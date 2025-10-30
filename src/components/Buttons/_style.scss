@@ -1,47 +1,23 @@
 .btn {
   position: relative;
   display: inline-block;
-  font-weight: $btn-font-weight;
-  line-height: $btn-line-height;
-  color: $body-color;
   white-space: nowrap;
   text-align: center;
   vertical-align: middle;
-  background-image: none;
-  border: $btn-border-width solid transparent;
-  @include button-size($btn-padding-y, $btn-padding-x, $btn-font-size, $border-radius);
-  box-shadow: $btn-box-shadow;
+  border: 1px solid transparent;
   cursor: pointer;
-  transition: $btn-transition;
+  transition: all 0.2s ease;
+  font-weight: $btn-font-weight;
+  line-height: $btn-line-height;
+  box-shadow: $btn-box-shadow;
+  @include button-size($btn-padding-y, $btn-padding-x, $btn-font-size, $border-radius);
+  @include button-style();
 
   &.disabled,
   &[disabled] {
     cursor: not-allowed;
     opacity: $btn-disabled-opacity;
     box-shadow: none;
-
-    > * {
-      pointer-events: none;
-    }
-  }
-}
-
-$btn-filled-variants: (
-        primary: (background: $primary, text: $white),
-        success: (background: $success, text: $white),
-        info: (background: $info, text: $white),
-        warning: (background: $warning, text: $white),
-        danger: (background: $danger, text: $white),
-        light: (background: $light, text: $dark),
-        dark: (background: $dark, text: $white),
-);
-
-// 默认颜色工具类，方便在其他类型按钮中复用
-@each $variant, $config in $btn-filled-variants {
-  .btn-color-#{$variant} {
-    $background: map-get($config, background);
-    $text: map-get($config, text);
-    @include button-style($background, $background, $text);
   }
 }
 
@@ -51,45 +27,178 @@ $btn-filled-variants: (
 }
 
 .btn-sm {
-  @include button-size($btn-padding-y-sm, $btn-padding-y-sm, $btn-font-size-sm, $border-radius-sm);
+  @include button-size($btn-padding-y-sm, $btn-padding-x-sm, $btn-font-size-sm, $border-radius-sm);
 }
 
+/* 按钮类型样式 */
 .btn-filled {
-  // default filled button falls back to primary theme color
-  @include button-style($primary, $primary, $white);
+  color: var(--btn-text);
 
-  @each $variant, $config in $btn-filled-variants {
-    &.btn-color-#{$variant} {
-      $background: map-get($config, background);
-      $text: map-get($config, text);
-      @include button-style($background, $background, $text);
-    }
+  &:hover,
+  &.hover {
+    box-shadow: 0 8px 24px -8px var(--btn-bg);
   }
 }
 
+.btn-border {
+  background-color: transparent;
+  color: var(--btn-border);
+  border-color: var(--btn-border);
+
+  &:hover {
+    background-color: var(--btn-border);
+    color: #fff;
+  }
+}
+
+.btn-line {
+  position: relative;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  color: var(--btn-border);
+  font-weight: 500;
+  overflow: hidden;
+  transition: color 0.3s ease;
+
+  &:disabled,
+  &.disabled {
+    color: rgba(0, 0, 0, 0.3);
+    cursor: not-allowed;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--btn-border);
+    opacity: 0.2; // 默认淡色
+  }
+
+  /* === 默认下划线位置 (bottom) === */
+  &::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 0%;
+    height: 2px;
+    background-color: var(--btn-border);
+    transform: translateX(-50%);
+    transition: all 0.3s ease;
+  }
+
+  &:hover::after {
+    width: 100%;
+  }
+
+  /* === Origin 方向控制 === */
+  &.line-origin-left::after {
+    left: 0;
+    transform: none;
+  }
+
+  &.line-origin-right::after {
+    right: 0;
+    left: auto;
+    transform: none;
+  }
+
+  /* === Line 在顶部 === */
+  &.line-position-top::before,
+  &.line-position-top::after {
+    top: 0;
+    bottom: auto;
+  }
+
+  /* === 动画方向 top + left + right === */
+  &.line-position-top.line-origin-left::after {
+    left: 0;
+  }
+
+  &.line-position-top.line-origin-right::after {
+    right: 0;
+  }
+
+  &:hover {
+    color: var(--btn-hover-border, var(--btn-border));
+    background: none;
+  }
+}
+
+.btn-gradient {
+  position: relative;
+  display: inline-block;
+  background: linear-gradient(
+                  45deg,
+                  var(--btn-bg),
+                  color-mix(in srgb, var(--btn-bg) 60%, white)
+  );
+  border: none;
+  color: var(--btn-text);
+  border-radius: 6px;
+  transition: all 0.25s ease;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+  transform: translateY(0);
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  }
+
+  &:disabled,
+  &.disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+  }
+}
+
+.btn-relief {
+  background-color: var(--btn-bg);
+  color: var(--btn-text);
+  border-color: var(--btn-bg);
+  box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.3);
+}
+
+//链接按钮
 .btn-link {
-  font-weight: $font-weight-normal;
-  color: $btn-link-color;
   background: none;
   border: none;
+  color: var(--btn-border);
   text-decoration: $link-decoration;
   box-shadow: none;
 
   &:hover {
-    color: $btn-link-hover-color;
+    color: var(--btn-hover-border, var(--btn-border));
     text-decoration: $link-hover-decoration;
-  }
-
-  &:focus,
-  &.focus {
-    text-decoration: $link-hover-decoration;
-    box-shadow: none;
   }
 
   &:disabled,
   &.disabled {
     color: $btn-link-disabled-color;
-    cursor: not-allowed;
     pointer-events: none;
+  }
+}
+
+//Flat按钮
+.btn-flat {
+  background-color: transparent;
+  color: var(--btn-border);
+  border: none;
+  box-shadow: none;
+
+  &:hover {
+    background-color: var(--btn-border);
+    color: #fff;
   }
 }

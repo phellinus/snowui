@@ -10,30 +10,127 @@ function App() {
                 <SyButton size={ButtonSize.Large}>大按钮</SyButton>
                 <SyButton>默认按钮</SyButton>
                 <SyButton size={ButtonSize.Small}>小按钮</SyButton>
-                <SyButton btnType={ButtonType.Flat}>默认按钮</SyButton>
+                <br />
                 <SyButton btnType={ButtonType.Filled} color="primary">
-                    测试
+                    primary
                 </SyButton>
                 <SyButton btnType={ButtonType.Filled} color="info">
-                    测试
+                    info
                 </SyButton>
                 <SyButton btnType={ButtonType.Filled} color="danger">
-                    测试
+                    danger
                 </SyButton>
                 <SyButton btnType={ButtonType.Filled} color="warning">
-                    测试
+                    warning
                 </SyButton>
                 <SyButton btnType={ButtonType.Filled} color="#860462" disabled>
-                    测试
+                    #860462
                 </SyButton>
                 <SyButton btnType={ButtonType.Filled} color="success" textColor="red">
-                    测试
+                    success
                 </SyButton>
+                <br />
                 <SyButton btnType={ButtonType.Link} textColor="white" disabled href="https://www.baidu.com">
                     链接按钮
                 </SyButton>
                 <SyButton btnType={ButtonType.Link} disabled textColor="white" href="https://www.baidu.com">
                     链接按钮
+                </SyButton>
+                <br />
+                border类型
+                <SyButton btnType={ButtonType.Border} color="primary">
+                    primary
+                </SyButton>
+                <SyButton btnType={ButtonType.Border} color="info">
+                    info
+                </SyButton>
+                <SyButton btnType={ButtonType.Border} color="danger">
+                    danger
+                </SyButton>
+                <SyButton btnType={ButtonType.Border} color="warning">
+                    warning
+                </SyButton>
+                <SyButton btnType={ButtonType.Border} color="#860462" disabled>
+                    #860462
+                </SyButton>
+                <SyButton btnType={ButtonType.Border} color="success" textColor="red">
+                    success
+                </SyButton>
+                <br />
+                <SyButton btnType={ButtonType.Flat} color="primary">
+                    primary
+                </SyButton>
+                <SyButton btnType={ButtonType.Flat} color="info">
+                    info
+                </SyButton>
+                <SyButton btnType={ButtonType.Flat} color="danger">
+                    danger
+                </SyButton>
+                <SyButton btnType={ButtonType.Flat} color="warning">
+                    warning
+                </SyButton>
+                <SyButton btnType={ButtonType.Flat} color="#860462" disabled>
+                    #860462
+                </SyButton>
+                <SyButton btnType={ButtonType.Flat} color="success" textColor="red">
+                    success
+                </SyButton>
+                <br />
+                <SyButton btnType={ButtonType.Line} color="primary">
+                    primary
+                </SyButton>
+                <SyButton btnType={ButtonType.Line} color="info">
+                    info
+                </SyButton>
+                <SyButton btnType={ButtonType.Line} color="danger" lineOrigin={'left'}>
+                    danger
+                </SyButton>
+                <SyButton btnType={ButtonType.Line} color="warning" lineOrigin={'right'}>
+                    warning
+                </SyButton>
+                <SyButton btnType={ButtonType.Line} color="#860462" disabled>
+                    #860462
+                </SyButton>
+                <SyButton btnType={ButtonType.Line} linePosition={'top'} color="success" textColor="red">
+                    success
+                </SyButton>
+                <br />
+                <SyButton btnType={ButtonType.Gradient} color="primary">
+                    primary
+                </SyButton>
+                <SyButton btnType={ButtonType.Gradient} color="info">
+                    info
+                </SyButton>
+                <SyButton btnType={ButtonType.Gradient} color="danger" lineOrigin={'left'}>
+                    danger
+                </SyButton>
+                <SyButton btnType={ButtonType.Gradient} color="warning" lineOrigin={'right'}>
+                    warning
+                </SyButton>
+                <SyButton btnType={ButtonType.Gradient} color="#860462" disabled>
+                    #860462
+                </SyButton>
+                <SyButton btnType={ButtonType.Gradient} linePosition={'top'} color="success" textColor="red">
+                    success
+                </SyButton>
+                <br />
+                <SyButton btnType={ButtonType.Relief} color="primary">
+                    primary
+                </SyButton>
+                <SyButton btnType={ButtonType.Relief} color="info">
+                    info
+                </SyButton>
+                <SyButton btnType={ButtonType.Relief} color="danger" lineOrigin={'left'}>
+                    danger
+                </SyButton>
+                <SyButton btnType={ButtonType.Relief} color="warning" lineOrigin={'right'}>
+                    warning
+                </SyButton>
+                <SyButton btnType={ButtonType.Relief} color="#860462" disabled>
+                    #860462
+                </SyButton>
+                <SyButton btnType={ButtonType.Relief} linePosition={'top'} color="success" textColor="red">
+                    success
                 </SyButton>
                 <h3>123</h3>
                 <h4>2</h4>

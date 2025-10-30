@@ -17,6 +17,9 @@ export enum ButtonType {
     Relief = 'relief',
 }
 
+export type LineOrigin = 'left' | 'right';
+export type LinePosition = 'top' | 'bottom';
+
 interface BaseButtonProps {
     className?: string;
     disabled?: boolean;
@@ -26,38 +29,59 @@ interface BaseButtonProps {
     color?: string;
     textColor?: string;
     href?: string;
+    lineOrigin?: LineOrigin;
+    linePosition?: LinePosition;
 }
 
+const presetColors: Record<string, string> = {
+    primary: '#1F74FF',
+    success: '#48C939',
+    info: '#17a2b8',
+    warning: '#FFBA00',
+    danger: '#FF4857',
+    light: '#f8f9fa',
+    dark: '#1E1E1E',
+};
 export const SyButton: FC<BaseButtonProps> = ({
     className,
     disabled = false,
     size = ButtonSize.Default,
     btnType = ButtonType.Filled,
     children,
-    color,
+    color = 'primary',
     textColor,
     href,
+    lineOrigin,
+    linePosition,
 }) => {
-    const classes = classNames('btn', {
+    // 判断颜色是预设名还是自定义色值
+    const baseColor = presetColors[color] || color;
+
+    // 基于类型定义不同的变量
+    const styleVars: React.CSSProperties = {
+        '--btn-bg': btnType === ButtonType.Border ? '#fff' : baseColor,
+        '--btn-border': baseColor,
+        '--btn-text': textColor || (btnType === ButtonType.Border || btnType === ButtonType.Line ? baseColor : '#fff'),
+        '--btn-hover-bg': btnType === ButtonType.Border ? baseColor : baseColor,
+        '--btn-hover-text': btnType === ButtonType.Border || btnType === ButtonType.Line ? '#fff' : '#fff',
+    } as React.CSSProperties;
+    const classes = classNames('btn', className, {
         [`btn-${size}`]: size,
         [`btn-${btnType}`]: btnType,
-        [`btn-color-${color}`]: color,
         disabled: btnType == ButtonType.Link && disabled,
+        [`line-origin-${lineOrigin}`]: lineOrigin,
+        [`line-position-${linePosition}`]: linePosition,
     });
     if (btnType == ButtonType.Link && href) {
         return (
-            <a className={classes} href={href}>
+            <a className={classes} href={href} style={styleVars}>
                 {children}
             </a>
         );
     }
     return (
         <>
-            <button
-                className={classes}
-                disabled={disabled}
-                style={{ color: textColor, backgroundColor: color, borderColor: color }}
-            >
+            <button className={classes} disabled={disabled} style={styleVars}>
                 {children}
             </button>
         </>
