@@ -42,7 +42,11 @@ const presetColors: Record<string, string> = {
     light: '#f8f9fa',
     dark: '#1E1E1E',
 };
-export const SyButton: FC<BaseButtonProps> = ({
+
+type NativeButtonProps = BaseButtonProps & React.ButtonHTMLAttributes<HTMLElement>;
+type AnchorButtonProps = BaseButtonProps & React.AnchorHTMLAttributes<HTMLElement>;
+export type ButtonProps = Partial<NativeButtonProps & AnchorButtonProps>;
+export const SyButton: FC<ButtonProps> = ({
     className,
     disabled = false,
     size = ButtonSize.Default,
@@ -53,6 +57,7 @@ export const SyButton: FC<BaseButtonProps> = ({
     href,
     lineOrigin,
     linePosition,
+    ...restProps
 }) => {
     // 判断颜色是预设名还是自定义色值
     const baseColor = presetColors[color] || color;
@@ -74,14 +79,14 @@ export const SyButton: FC<BaseButtonProps> = ({
     });
     if (btnType == ButtonType.Link && href) {
         return (
-            <a className={classes} href={href} style={styleVars}>
+            <a className={classes} href={href} style={styleVars} {...restProps}>
                 {children}
             </a>
         );
     }
     return (
         <>
-            <button className={classes} disabled={disabled} style={styleVars}>
+            <button className={classes} disabled={disabled} style={styleVars} {...restProps}>
                 {children}
             </button>
         </>

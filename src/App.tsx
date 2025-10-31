@@ -7,8 +7,10 @@ function App() {
             <header className="App-header">
                 <h1>Hello World</h1>
                 <h2>测试</h2>
-                <SyButton size={ButtonSize.Large}>大按钮</SyButton>
-                <SyButton>默认按钮</SyButton>
+                <SyButton size={ButtonSize.Large} autoFocus>
+                    大按钮
+                </SyButton>
+                <SyButton className="icon">默认按钮</SyButton>
                 <SyButton size={ButtonSize.Small}>小按钮</SyButton>
                 <br />
                 <SyButton btnType={ButtonType.Filled} color="primary">
@@ -30,7 +32,7 @@ function App() {
                     success
                 </SyButton>
                 <br />
-                <SyButton btnType={ButtonType.Link} textColor="white" disabled href="https://www.baidu.com">
+                <SyButton btnType={ButtonType.Link} textColor="white" href="https://www.baidu.com">
                     链接按钮
                 </SyButton>
                 <SyButton btnType={ButtonType.Link} disabled textColor="white" href="https://www.baidu.com">
@@ -111,10 +113,10 @@ function App() {
                     #860462
                 </SyButton>
                 <SyButton btnType={ButtonType.Gradient} linePosition={'top'} color="success" textColor="red">
-                    success
+                    success1
                 </SyButton>
                 <br />
-                <SyButton btnType={ButtonType.Relief} color="primary">
+                <SyButton btnType={ButtonType.Relief} color="primary" onClick={() => console.log('click')}>
                     primary
                 </SyButton>
                 <SyButton btnType={ButtonType.Relief} color="info">

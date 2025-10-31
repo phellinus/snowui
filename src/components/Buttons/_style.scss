@@ -180,6 +180,7 @@
 
   &:hover {
     color: var(--btn-hover-border, var(--btn-border));
+    background: none;
     text-decoration: $link-hover-decoration;
   }
 
